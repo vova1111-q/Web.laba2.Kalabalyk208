@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TravelSphere — гарячі пропозиції</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="logo" href="#home">TravelSphere</a>
+
+      <nav class="nav">
+        <a href="#offers">Пропозиції</a>
+        <a href="#news">Новини</a>
+        <a href="#catalog">Каталог</a>
+      </nav>
+
+      <div class="nav-actions">
+        <label class="search-box">
+          <input id="globalSearch" type="text" placeholder="Пошук..." />
+          <button id="searchBtn" type="button">Пошук</button>
+        </label>
+
+        <button id="authBtn" class="icon-btn" type="button" title="Авторизація / Реєстрація">
+          👤
+        </button>
+
+        <button id="cartBtn" class="icon-btn" type="button" title="Кошик">
+          🛒 <span id="cartCount" class="badge">0</span>
+        </button>
+
+        <button id="menuBtn" class="icon-btn mobile-only" type="button" title="Меню">☰</button>
+      </div>
+    </div>
+
+    <div id="mobileNav" class="mobile-nav">
+      <a href="#offers">Пропозиції</a>
+      <a href="#news">Новини</a>
+      <a href="#catalog">Каталог</a>
+    </div>
+  </header>
+
+  <main id="home">
+    <section class="hero section">
+      <div class="container">
+        <div class="section-head">
+          <h1>Гарячі пропозиції для подорожей</h1>
+          
+        </div>
+
+        <div class="carousel">
+          <button class="carousel-btn prev" id="prevSlide" aria-label="Попередній слайд">‹</button>
+
+          <div class="carousel-track" id="carouselTrack">
+            
+            <article class="slide">
+              <div class="slide-content">
+                <span class="pill">-35% знижка</span>
+                <h2>Балі, Індонезія</h2>
+                <p>Сонце, океан і найкращі пляжі для відпочинку круглий рік.</p>
+                <div class="slide-meta">
+                  <strong>від 18 900 грн</strong>
+                  <button class="primary" type="button" onclick="document.querySelector('#catalog').scrollIntoView({behavior:'smooth'})">Перейти до каталогу</button>
+                </div>
+              </div>
+            </article>
+
+            
+
+            <article class="slide">
+              <div class="slide-content">
+                <span class="pill">Гаряча поїздка</span>
+                <h2>Карпати, Україна</h2>
+                <p>Гори, чисте повітря, готелі та активний відпочинок на вихідні.</p>
+                <div class="slide-meta">
+                  <strong>від 2 700 грн</strong>
+                  <button class="primary" type="button" onclick="document.querySelector('#catalog').scrollIntoView({behavior:'smooth'})">Забронювати</button>
+                </div>
+              </div>
+            </article>
+
+            <article class="slide">
+              <div class="slide-content">
+                <span class="pill">New</span>
+                <h2>Прага, Чехія</h2>
+                <p>Місто з атмосферою старої Європи, музеями та прогулянками.</p>
+                <div class="slide-meta">
+                  <strong>від 11 500 грн</strong>
+                  <button class="primary" type="button" onclick="document.querySelector('#catalog').scrollIntoView({behavior:'smooth'})">Дивитися</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <button class="carousel-btn next" id="nextSlide" aria-label="Наступний слайд">›</button>
+        </div>
+
+        <div class="carousel-dots" id="carouselDots"></div>
+      </div>
+    </section>
+
+    <section id="news" class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>Новини компанії</h2>
+          <p>Новини розташовані у хронологічному порядку та мають різний статус важливості.</p>
+        </div>
+
+        <div class="news-list" id="newsList"></div>
+      </div>
+    </section>
+
+    <section id="catalog" class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>Каталог товарів</h2>
+          <p>Фільтрація, сортування, пошук, ціновий діапазон, картковий дизайн та завантаження частинами.</p>
+        </div>
+
+        <aside class="filters">
+          <div class="filter-group">
+            <span>Тип</span>
+            <div id="typeFilters" class="filter-tabs"></div>
+          </div>
+
+          <div class="filter-group">
+            <span>Сортування</span>
+            <select id="sortSelect">
+              <option value="default">За замовчуванням</option>
+              <option value="name-asc">Назва: А → Я</option>
+              <option value="name-desc">Назва: Я → А</option>
+              <option value="price-asc">Ціна: зростання</option>
+              <option value="price-desc">Ціна: спадання</option>
+            </select>
+          </div>
+
+          <div class="filter-group range-group">
+            <span>Ціна</span>
+            <div class="range-row">
+              <input id="minPrice" type="number" placeholder="Від" min="0" />
+              <input id="maxPrice" type="number" placeholder="До" min="0" />
+            </div>
+          </div>
+
+          <div class="filter-group">
+            <button id="resetFilters" class="secondary" type="button">Скинути фільтри</button>
+          </div>
+        </aside>
+
+        <div class="toolbar">
+          <div id="resultInfo" class="result-info"></div>
+          <div class="toolbar-actions">
+            <button id="toggleView" class="secondary" type="button">Щільний вигляд</button>
+          </div>
+        </div>
+
+        <div id="productGrid" class="product-grid"></div>
+
+        <div class="load-more-wrap">
+          <button id="loadMoreBtn" class="primary" type="button">Більше</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <button id="toTop" class="to-top" type="button" aria-label="Прокрутити вгору">↑</button>
+
+  <div id="cartDrawer" class="cart-drawer">
+    <div class="cart-header">
+      <h3>Кошик покупця</h3>
+      <button id="closeCart" class="icon-btn" type="button">✕</button>
+    </div>
+    <div id="cartItems" class="cart-items"></div>
+    <div class="cart-footer">
+      <div>Сума: <strong id="cartTotal">0 грн</strong></div>
+      <button class="primary" type="button">Оформити</button>
+    </div>
+  </div>
+
+  <div id="overlay" class="overlay hidden"></div>
+
+  <div id="authModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+    <div class="modal-card">
+      <button class="modal-close" data-close="authModal" type="button">✕</button>
+      <h3 id="authTitle">Авторизація / Реєстрація</h3>
+      <div class="auth-switch">
+        <button class="tab active" data-auth-tab="login" type="button">Вхід</button>
+        <button class="tab" data-auth-tab="register" type="button">Реєстрація</button>
+      </div>
+
+      <form id="loginForm" class="auth-form">
+        <input type="email" placeholder="Email" required />
+        <input type="password" placeholder="Пароль" required />
+        <button class="primary" type="submit">Увійти</button>
+      </form>
+
+      <form id="registerForm" class="auth-form hidden">
+        <input type="text" placeholder="Ім'я" required />
+        <input type="email" placeholder="Email" required />
+        <input type="password" placeholder="Пароль" required />
+        <button class="primary" type="submit">Зареєструватися</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="adModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="adTitle">
+    <div class="modal-card ad-card">
+      <h3 id="adTitle">Спецпропозиція!</h3>
+      <p>Отримайте -20% на перше бронювання сьогодні.</p>
+      <p class="countdown">Закриття стане доступним через <span id="adTimer">5</span> с.</p>
+      <button id="adClose" class="secondary" type="button" disabled>Закрити</button>
+    </div>
+  </div>
+
+  <div id="subscribeBar" class="subscribe-bar hidden">
+    <div>
+      <strong>Підписка на повідомлення</strong>
+      <p>Отримуйте новини та гарячі пропозиції першими.</p>
+    </div>
+    <div class="subscribe-actions">
+      <button id="acceptSubscribe" class="primary" type="button">Погоджуюсь</button>
+      <button id="declineSubscribe" class="secondary" type="button">Ні, дякую</button>
+    </div>
+  </div>
+
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
